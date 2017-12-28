@@ -1,0 +1,60 @@
+{% extends "home/header.html" %}
+{% block title %}
+    about me
+{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block content%}
+<br>
+
+    <div class="row">
+
+<div class="col-lg-4 col-md-4 col-xs-4 thumb">
+    <a class="thumbnail" href="#">
+        <img class="img-responsive" src="{% static 'home/img/profile.jpg' %}" alt="face">
+    </a>
+</div>
+<div class="col-lg-4 col-md-4 col-xs-4 thumb">
+    <a class="thumbnail">
+         <h2>Juan Li</h2>
+        <p>Junior data scientist</p>
+        <p>programming enthusiast</p>
+        <p>medical researcher</p>
+    </a>
+</div>
+<div class="col-lg-4 col-md-4 col-xs-4 thumb">
+    <a class="thumbnail">
+        <h2>Current status</h2>
+        <p>Looking for job!</p>
+        <p>Please contact me: juanli.work@gmail.com</p>
+    </a>
+</div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+            <div class="row">
+		  <div>
+              {% include 'home/includes/aboutme.html' %}
+            </div>
+
+
+
+{% endblock %}
+
+
+
+
+
+

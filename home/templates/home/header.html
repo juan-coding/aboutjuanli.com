@@ -38,6 +38,11 @@
     a:hover {
     color: red;
     }
+    #content {
+    margin-left: 80px;
+    margin-right: 80px;
+    }
+
 </style>
 
 
@@ -85,8 +90,8 @@
        </nav><br>
 <br>
 
-<div>
-    {% block body %} {% endblock %}
+<div id="content">
+    {% block content %} {% endblock %}
 </div>
 
 	<footer class="footer">

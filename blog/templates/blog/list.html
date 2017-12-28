@@ -5,7 +5,7 @@
 
 {% load staticfiles %}
 
-{% block body %}
+{% block content %}
 {% for post in posts %}
         <div>
             <h1><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h1>
