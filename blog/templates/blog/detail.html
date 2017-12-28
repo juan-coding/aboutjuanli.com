@@ -1,0 +1,12 @@
+{% extends "home/header.html" %}
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block body %}
+  <h1>{{ post.title }}</h1><br>
+  <p><em>publish: {{ post.publish }} </em></p><br>
+  <p>{{ post.body|safe|linebreaks }}</p>
+{% endblock %}

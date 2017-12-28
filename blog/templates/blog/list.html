@@ -1,0 +1,15 @@
+{% extends "home/header.html" %}
+{% block title %}
+    post list
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block body %}
+{% for post in posts %}
+        <div>
+            <h1><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h1>
+            <em>{{ post.publish }}</em>
+        </div>
+    {% endfor %}
+{% endblock %}

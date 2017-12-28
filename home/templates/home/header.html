@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="personal website">
+    <meta name="author" content="Juan Li">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+
+        {% load staticfiles %}
+
+    <!--bootstrap css-->
+ 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type = "text/css"/>
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}" type="text/css"/> #blog application
+
+    <!--jquery for boostrap javascript plugin-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="{% static 'home/js/3.2.1 jquery.min.j' %}"></script>-->
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'home/js/header.js' %}"></script>
+
+    <!--image-->
+    <link rel="shortcut icon" href="{% static 'home/img/favicon.ico' %}" type="image/x-icon"/>
+
+    <title>JuanLi|{% block title %}{% endblock %}</title>
+</head>
+
+<style>
+     h1 {
+    color:black;
+    font-size:3em;
+    }
+    input {
+    left-margin:1000px;
+    }
+
+    a:hover {
+    color: red;
+    }
+</style>
+
+
+
+<body>
+    <!--<div style="background-color:black">-->
+    <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--<div class="row">-->
+			  <!--<div class="col-sm-2">-->
+				  <!--<br>-->
+                  <!--<br>-->
+				  <!--<center>-->
+                      <!--<h3><font color="red">about</font><font style="oblique" color="white">JuanLi</font><font color="red">.com</font></h3>&lt;!&ndash;<img src="{% static 'personal/img/profile.jpg' %}" class="img-responsive" style='max-height:100px;' alt="face">&ndash;&gt;-->
+				  <!--</center>-->
+			  <!--</div>-->
+			  <!--<div class="col-sm-10">-->
+                  <!--<center>-->
+                      <!--<h2><font color="#5DADE2 ">{% block contents %}{% endblock %}</font></h2>-->
+                      <!--<p><br></p>-->
+                  <!--</center>-->
+			  <!--</div>-->
+		<!--</div>-->
+      <!--</div>-->
+
+       <nav class="navbar navbar-default" data-spy="affix">
+           <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/about/"><font color="red">About</font><font color="#D4AC0D">JuanLi</font></a>
+                        <!--<img style="max-width:100px; margin-top: -15px;" src="{% static 'home/img/apple-touch-icon-57x57.png' %}"/></a>-->
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="/">HOME</a></li>
+                        <li><a href="/project/">PROJECT</a><li>
+                        <li><a href="/cv/">CV</a></li>
+                        <li><a href="/blog/">BLOG</a></li>
+                    </ul>
+                </div>
+            </div>
+       </nav><br>
+<br>
+
+<div>
+    {% block body %} {% endblock %}
+</div>
+
+	<footer class="footer">
+		<div class="container-fluid" style='margin-left:15px'>
+            <p>Copy right &copy; {%now "Y"%} Juan Li &middot;</p>
+		</div>
+	</footer>
+</body>
+</html>
