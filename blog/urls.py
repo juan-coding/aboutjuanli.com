@@ -18,6 +18,8 @@ from . import views
 
 
 urlpatterns = [
-   path('', views.PostListView.as_view(), name='post_list'),
-   re_path(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
+   # path('', views.PostListView.as_view(), name='post_list'),
+   path('', views.post_list, name='post_list'),
+   # re_path(r'^posts/(?:page-(?P<page>\d+)/)?$', views.listing, name='listing'),
+   re_path(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
 ]
