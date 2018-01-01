@@ -9,7 +9,7 @@
 
 {% for post in posts %}
 <h2><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h2>
-<p>publish: <em>{{ post.publish }}</em>, tag: <em>{{ post.tag }}</em></p>
+<p>publish: {{ post.publish }}; tag: {{ post.tag }}</p><br>
 <div>{{ post.body|truncatewords:100}}</div>
 {% endfor %}
 

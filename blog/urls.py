@@ -23,7 +23,7 @@ urlpatterns = [
    re_path(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
    # re_path(r'^(?P<year>\d{4})/$', PostYearArchiveView.as_view, name='post_year_archive'),
    re_path(r'^(?P<year>\d{4})/$', views.post_year_archive, name='post_year_archive'),
-   re_path(r'^(?P<tag>[-\w]+)/$', views.tag_view, name='tag_view'),
+   re_path(r'^tag/(?P<tag>[-\w]+)/$', views.tag_view, name='tag_view'),
 
 ]
 

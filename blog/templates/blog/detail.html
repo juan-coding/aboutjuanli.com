@@ -7,6 +7,6 @@
 
 {% block content %}
   <h1>{{ post.title }}</h1><br>
-  <p><em>publish: {{ post.publish }} </em></p><br>
+ <p>Publish: <em>{{ post.publish }}</em>  Tag: <em>{{ post.tag }}</em></p><br>
   <p>{{ post.body|safe|linebreaks }}</p>
 {% endblock %}

@@ -72,13 +72,17 @@ def post_list(request):
 
 
 def post_detail(request, year, month, day, slug):
+    sidebardata = sidebar_data()
     post = get_object_or_404(Post,
                              publish__year=year,
                              publish__month=month,
                              publish__day=day,
                              slug=slug,
                              status='published') # only display the post detail for published posts
-    return render(request, 'blog/detail.html', {'post': post})
+    return render(request, 'blog/detail.html', {'post': post,
+                                                'tag_count': sidebardata['tag_count'],
+                                                'year_count': sidebardata['year_count']})
+
 
 
 def post_year_archive(request, year):
@@ -87,10 +91,13 @@ def post_year_archive(request, year):
 
 
 def tag_view(request, tag):
+    sidebardata = sidebar_data()
     tag_posts = Post.objects.all().filter(tag=tag)
     # tag_posts = get_object_or_404(Post, tag=tag)
     paginator = Paginator(tag_posts, 5)
     page = request.GET.get('page')
     tag_posts = paginator.get_page(page)
-    return render(request, 'blog/tag_view.html', {"posts": tag_posts})
+    return render(request, 'blog/tag_view.html', {"posts": tag_posts,
+                                                  'tag_count': sidebardata['tag_count'],
+                                                  'year_count': sidebardata['year_count']})
 

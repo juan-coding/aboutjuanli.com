@@ -40,24 +40,29 @@
     color: red;
     }
 
-    #post-body {
-    margin-left: 1.5cm;
+    #content {
+    margin: 1.5cm;
     }
 
+    <!--.panel {-->
+    <!--margin-top:1.6cm;-->
+    <!--padding-right:1.5cm;-->
+    <!--width: 270px;-->
+    <!--}-->
+
     #sidebar {
+    position: fixed;
+    margin-right:1.5cm;
+    background-color: #f6f6f6;
+    width: 300px;
+    }
 
-        float:right;
-        margin-right:1.5m;
 
-         width:150px;
-         background-color:#ccc;
-         min-height=400px;
-        }
 </style>
 
 
 <body>
-       <nav class="navbar navbar-default center" data-spy="affix">
+       <nav class="navbar navbar-inverse center" data-spy="affix">
            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -80,43 +85,25 @@
 <br>
 
 
-
-
-
-<div class="content">
-    <div class="col-md-8">
-        <div id="post-body">
+     <div id="content">
+        <div class="col-sm-10">
             {% block content %} {% endblock %}
         </div>
-    </div>
-
-    <div class="col-md-4"></div>
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>Tags</h4>
-            </div>
-                <ul class="list-group">
-                    {% for line in tag_count %}
-                    <li>{{ line.tag }} ({{ line.count }})</li>
-                    {% endfor %}
-                </ul>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>Archive</h4>
-            </div>
-              <ul class="list-group">
+        <div class="col-sm-2">
+            <div id = 'sidebar'>
+                <div
+             <h4>TAGS</h4>
+             {% for line in tag_count %}
+             <a href="/blog/tag/{{ line.tag }}">{{ line.tag }}</a> ({{ line.count }})<br>
+             {% endfor %}
+             <br>
+             <h4>ARCHIVE</h4>
              {% for line in year_count %}
-                  <li><a href="{{ line.year }}">{{ line.year }}</a> ({{ line.count }}) </li>
-                {% endfor %}
-              </ul>
+             <a href="{{ line.year }}">{{ line.year }}</a> ({{ line.count }})<br>
+             {% endfor %}
             </div>
         </div>
-
-</div>
-
+     </div>
 
 
 
