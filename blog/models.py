@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-
 # class PublishedManger(models.Manager):
 #     def get_queryset(self):
 #         return super(PublishedManger, self).get_queryset().filter(status='published')
@@ -19,6 +18,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    tag = models.CharField(max_length=50, default='default')
 
     class Meta:
         ordering = ['-publish']
@@ -28,4 +28,8 @@ class Post(models.Model):
 
     objects = models.Manager()
     # published = PublishedManger()
+
+
+
+
 

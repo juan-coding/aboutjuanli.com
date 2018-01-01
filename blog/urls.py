@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.urls import path, re_path
 from . import views
-
+# from blog.views import PostYearArchiveView
 
 urlpatterns = [
    # path('', views.PostListView.as_view(), name='post_list'),
    path('', views.post_list, name='post_list'),
-   # re_path(r'^posts/(?:page-(?P<page>\d+)/)?$', views.listing, name='listing'),
    re_path(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$', views.post_detail, name='post_detail'),
+   # re_path(r'^(?P<year>\d{4})/$', PostYearArchiveView.as_view, name='post_year_archive'),
+   re_path(r'^(?P<year>\d{4})/$', views.post_year_archive, name='post_year_archive'),
+   re_path(r'^(?P<tag>[-\w]+)/$', views.tag_view, name='tag_view'),
+
 ]
+

@@ -1,19 +1,19 @@
-{% extends "home/header.html" %}
+{% extends "blog/base.html" %}
 {% block title %}
-    post list
+    blog tag
 {% endblock %}
 
 {% load staticfiles %}
 
 {% block content %}
 
+
 {% for post in posts %}
-        <div>
-            <h2><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h2>
-            <em>{{ post.publish }}</em>
-            <p>{{ post.body|truncatewords:'100' }}</p>
-        </div>
+<h2><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h2>
+<p>publish: <em>{{ post.publish }}</em>, tag: <em>{{ post.tag }}</em></p>
+<div>{{ post.body|truncatewords:100}}</div>
 {% endfor %}
+
 <div class="pagination">
     <span class="step-links">
         {% if posts.has_previous %}

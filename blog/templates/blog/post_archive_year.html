@@ -1,0 +1,16 @@
+{% extends "home/header.html" %}
+{% block title %}
+    post list
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h1>All posts for {{ year}}</h1>
+<ul>
+    {% for post in posts %}
+        <li>{{ post.title }} - {{ post.publish}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
