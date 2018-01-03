@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
+import re
 
 # class PublishedManger(models.Manager):
 #     def get_queryset(self):
@@ -29,7 +31,10 @@ class Post(models.Model):
     objects = models.Manager()
     # published = PublishedManger()
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
-
-
-
+    def tag_list(self):
+        tag_list = re.split(", ", self.tag)
+        return tag_list

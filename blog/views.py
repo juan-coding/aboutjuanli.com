@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 # from django.views.generic import ListView
 from django.core.paginator import Paginator
 # from django.views.generic.dates import YearArchiveView
+import re
 
 # class PostListView(ListView):
 #     model = Post
@@ -26,11 +27,13 @@ def tag_archive_data(posts):
     count_list = []
     count = {}
     for post in posts:
-        tag = post.tag
-        if tag not in count:
-            count[tag] = 1
-        else:
-            count[tag] += 1
+        # tag = post.tag
+        tag_list = re.split(", ", post.tag)
+        for tag in tag_list:
+            if tag not in count:
+                count[tag] = 1
+            else:
+                count[tag] += 1
     for k, v in sorted(count.items(), reverse=True):
         count_list.append({'tag': k, 'count': v})
     return count_list
@@ -63,7 +66,7 @@ def sidebar_data():
 def post_list(request):
     sidebardata = sidebar_data()
     posts = Post.objects.all().filter(status='published')
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 3)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'blog/list.html', {'posts': posts,
@@ -84,15 +87,24 @@ def post_detail(request, year, month, day, slug):
                                                 'year_count': sidebardata['year_count']})
 
 
-
 def post_year_archive(request, year):
-    # posts = Post.objects.all().filter(publish__year=year)
-    return render(request, 'blog/post_archive_year.html', {"posts": posts, "year": year})
+    sidebardata = sidebar_data()
+    posts = Post.objects.all().filter(publish__year=year)
+    return render(request, 'blog/post_archive_year.html', {"posts": posts,
+                                                           "year": year,
+                                                           'tag_count': sidebardata['tag_count'],
+                                                           'year_count': sidebardata['year_count']})
 
 
 def tag_view(request, tag):
     sidebardata = sidebar_data()
-    tag_posts = Post.objects.all().filter(tag=tag)
+    tag_posts = []
+    for post in posts:
+        tag_list = re.split(", ", post.tag)
+        if tag in tag_list:
+            tag_posts.append(post)
+
+    # tag_posts = Post.objects.all().filter(tag=tag)
     # tag_posts = get_object_or_404(Post, tag=tag)
     paginator = Paginator(tag_posts, 5)
     page = request.GET.get('page')

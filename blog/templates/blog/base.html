@@ -55,6 +55,7 @@
     margin-right:1.5cm;
     background-color: #f6f6f6;
     width: 300px;
+    height:100%;
     }
 
 
@@ -81,9 +82,7 @@
                     </ul>
                 </div>
             </div>
-       </nav><br>
-<br>
-
+       </nav>
 
      <div id="content">
         <div class="col-sm-10">
@@ -91,15 +90,14 @@
         </div>
         <div class="col-sm-2">
             <div id = 'sidebar'>
-                <div
              <h4>TAGS</h4>
-             {% for line in tag_count %}
-             <a href="/blog/tag/{{ line.tag }}">{{ line.tag }}</a> ({{ line.count }})<br>
+             {% for element in tag_count %}
+             <a href="/blog/tag/{{ element.tag }}">{{ element.tag }}</a> ({{ element.count }})<br>
              {% endfor %}
              <br>
              <h4>ARCHIVE</h4>
-             {% for line in year_count %}
-             <a href="{{ line.year }}">{{ line.year }}</a> ({{ line.count }})<br>
+             {% for element in year_count %}
+             <a href="/blog/{{ element.year }}">{{ element.year }}</a> ({{ element.count }})<br>
              {% endfor %}
             </div>
         </div>
