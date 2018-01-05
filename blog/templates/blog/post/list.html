@@ -1,4 +1,4 @@
-{% extends "blog/base.html" %}
+{% extends "blog/post/base.html" %}
 {% block title %}
     post list
 {% endblock %}
@@ -6,6 +6,8 @@
 {% load staticfiles %}
 
 {% block content %}
+
+<h2>{{ body_title }}</h2><hr>
 
 {% for post in posts %}
 <h2><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h2>
