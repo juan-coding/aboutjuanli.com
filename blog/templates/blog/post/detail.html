@@ -8,17 +8,25 @@
 {% block content %}
  {% for post in posts %}
 <h2><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h2>
-<em>Update</em>: {{ post.updated|date:"Y-m-d" }}&nbsp;&nbsp;
-<em>Publish</em>: {{ post.publish|date:"Y-m-d" }}&nbsp;&nbsp;
-<em>Tags</em>:
+Update: {{ post.updated|date:"Y-m-d" }}&nbsp;&nbsp;
+Publish: {{ post.publish|date:"Y-m-d" }}&nbsp;&nbsp;
+Tags:
     {% for tag in post.tag_list %}
     <a href="/blog/tag/{{ tag }}">{{ tag }} </a>
     {% endfor %}&nbsp;&nbsp;<br>
 <p>{{ post.body|safe|linebreaks }}</p>
-<a href="/blog/share/{{ post.id }}">Share this post</a><br>
+<br>
 
-<h4>{{ count }} comment{{ count|pluralize }}</h4>
+<h4><a href="/blog/share/{{ post.id }}">Share this post</a></h4>
+<br>
+{% with similar_posts.count as count %}
+<h4>{{ similar_posts_count }} similar post{{ similar_posts_count|pluralize }}</h4>
+{% endwith %}
+    {% for post in similar_posts %}
+        <li><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></li>
+    {% endfor %}<br>
 
+<h4>{{ comment_count }} comment{{ comment_count|pluralize }}</h4>
 {% for comment in comments %}
     <div class="comment" style="background-color: ">
         <p>Comment {{ forloop.counter }} by <strong>{{ comment.name }}</strong>  {{ comment.created|date:"Y-m-d" }}</p>
@@ -35,4 +43,10 @@ There is no comment yet.
       {% csrf_token %}
     <button type="submit">Submit</button>
 </form>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}
+

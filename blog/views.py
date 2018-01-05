@@ -100,8 +100,10 @@ def post_detail(request, year, month, day, slug):
     post_list.append(post)
     data.update({"posts": post_list})
     # return render(request, 'blog/post/detail.html', data)
+
+    # process comment data
     comments = post.comments.filter(active=True)
-    count = comments.count()
+    comment_count = comments.count()
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -110,9 +112,20 @@ def post_detail(request, year, month, day, slug):
             new_comment.save()
     else:
         comment_form = CommentForm()
+
+    # create similar posts according to tag
+    post_tag = post.tag_list()
+    similar_posts = []
+    for tag in post_tag:
+        posts_with_same_tag = Post.objects.all().filter(status='published', tag=tag).exclude(id=post.id)
+        for post_with_same_tag in posts_with_same_tag:
+            similar_posts.append(post_with_same_tag)
+    similar_posts_count = len(similar_posts)
     data.update({'form': comment_form,
                  'comments': comments,
-                 'count': count})
+                 'comment_count': comment_count,
+                 'similar_posts': similar_posts,
+                 'similar_posts_count': similar_posts_count})
     return render(request, 'blog/post/detail.html', data)
 
 
