@@ -14,7 +14,25 @@
     {% for tag in post.tag_list %}
     <a href="/blog/tag/{{ tag }}">{{ tag }} </a>
     {% endfor %}&nbsp;&nbsp;<br>
+<p>{{ post.body|safe|linebreaks }}</p>
 <a href="/blog/share/{{ post.id }}">Share this post</a><br>
-  <p>{{ post.body|safe|linebreaks }}</p>
+
+<h4>{{ count }} comment{{ count|pluralize }}</h4>
+
+{% for comment in comments %}
+    <div class="comment" style="background-color: ">
+        <p>Comment {{ forloop.counter }} by <strong>{{ comment.name }}</strong>  {{ comment.created|date:"Y-m-d" }}</p>
+        {{ comment.body|linebreaks }}
+    </div>
+{% empty %}
+There is no comment yet.
 {% endfor %}
+
+{% endfor %}<br>
+<h4>Add a new comment</h4>
+<form action="" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+    <button type="submit">Submit</button>
+</form>
 {% endblock %}

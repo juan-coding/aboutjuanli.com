@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404
 # from django.views.generic import ListView
 from django.core.paginator import Paginator
 import re
-from blog.forms import EmailSharePostForm
-from django.urls import reverse
+from blog.forms import EmailSharePostForm, CommentForm
+# from django.urls import reverse
 from django.core.mail import send_mail
 
 
@@ -99,10 +99,21 @@ def post_detail(request, year, month, day, slug):
                              status='published')
     post_list.append(post)
     data.update({"posts": post_list})
+    # return render(request, 'blog/post/detail.html', data)
+    comments = post.comments.filter(active=True)
+    count = comments.count()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    data.update({'form': comment_form,
+                 'comments': comments,
+                 'count': count})
     return render(request, 'blog/post/detail.html', data)
-    # return render(request, 'blog/detail.html', {'posts': posts,
-    #                                             'tag_count': sidebardata['tag_count'],
-    #                                             'year_count': sidebardata['year_count']})
 
 
 def tag_view(request, tag):
@@ -118,7 +129,7 @@ def tag_view(request, tag):
     paginator = Paginator(tag_posts, 5)
     page = request.GET.get('page')
     tag_posts = paginator.get_page(page)
-    data.update({"posts": tag_posts, 'body_title': 'Posts for tag: {}'.format(tag)})
+    data.update({"posts": tag_posts, 'body_title': 'Posts tagged with "{}"'.format(tag)})
     return render(request, 'blog/post/list.html', data)
     # return render(request, 'blog/tag_view.html', {"posts": tag_posts,
     #                                               'tag_count': sidebardata['tag_count'],
@@ -137,7 +148,7 @@ def share_post(request, post_id):
         if form.is_valid():
             from django.urls import reverse
             post_url = request.build_absolute_uri(reverse('post_detail', args=(post.publish.year, post.publish.month,
-                                                                               post.publish.day,post.slug)))
+                                                                               post.publish.day, post.slug)))
             cd = form.cleaned_data
             name = cd['name']
             from_email = cd['email']
@@ -149,16 +160,9 @@ def share_post(request, post_id):
             sent = True
     else:
         form = EmailSharePostForm()
-    return render(request, 'blog/share/share_post.html', {'post': post,
-                                                         'form': form,
-                                                         'sent': sent})
-
-
-
-
-
-
-
+    return render(request, 'blog/share/index.html', {'post': post,
+                                                     'form': form,
+                                                     'sent': sent})
 
 
 
