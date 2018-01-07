@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'about',
     'cv',
     'contact',
+    'project',
 ]
+INSTALLED_APPS += ['django_social_share']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

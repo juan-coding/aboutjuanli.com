@@ -17,11 +17,16 @@ Tags:
 <p>{{ post.body|safe|linebreaks }}</p>
 <br>
 
-<h4><a href="/blog/share/{{ post.id }}">Share this post</a></h4>
+<!--<h4><a href="/blog/share/{{ post.id }}">Share this post by e-mail</a></h4>-->
+{% load social_share %}
+{% post_to_facebook object_or_url "Post to Facebook!" %}
+{% post_to_twitter "Nice post: {{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
+{% post_to_gplus object_or_url "Post to Google+!" %}
+{% post_to_linkedin object.title object_or_url "Post to LinkedIn" %}
+{% send_email object.title "Nice post {{object.title}}. Check it out!" object_or_url "Share via email" %}
+
 <br>
-{% with similar_posts.count as count %}
 <h4>{{ similar_posts_count }} similar post{{ similar_posts_count|pluralize }}</h4>
-{% endwith %}
     {% for post in similar_posts %}
         <li><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></li>
     {% endfor %}<br>

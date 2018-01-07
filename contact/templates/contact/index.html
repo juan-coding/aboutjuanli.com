@@ -1,11 +1,28 @@
 {% extends 'home/header.html' %}
+
 {% block title %}Contact{% endblock %}
 
 {% block content %}
-<h1>Contact</h1>
+<br>
+<br>
+<h4>Follow me</h4>
+<a href="https://www.facebook.com/profile.php?id=100010486878814" class="fa fa-facebook"></a>
+<a href="https://twitter.com/FunnyJuanli" class="fa fa-twitter"></a>
+<a href="https://www.linkedin.com/in/juan-li2017/" class="fa fa-linkedin"></a>
+<br>
+<br>
+{% if sent %}
+<h1>Your E-mail successfully sent to <u>Juan Li</u></h1>
+{% else %}
+<h4>Or send me a message</h4>
 <form role="form" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
 </form>
+{% endif %}
 {% endblock %}
+
+
+
+

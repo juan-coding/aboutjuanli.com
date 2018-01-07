@@ -3,9 +3,10 @@ from django.utils import timezone
 from django.utils.text import slugify
 import re
 
-# class PublishedManger(models.Manager):
-#     def get_queryset(self):
-#         return super(PublishedManger, self).get_queryset().filter(status='published')
+
+class PublishedManger(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManger, self).get_queryset().filter(status='published')
 
 
 class Post(models.Model):
@@ -29,7 +30,7 @@ class Post(models.Model):
         return self.title
 
     objects = models.Manager()
-    # published = PublishedManger()
+    published = PublishedManger()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -52,8 +53,8 @@ class Comment(models.Model):
     class Meta:
         ordering = ('created',)
 
-    def __str__(self):
-        return 'Comment by {} on {}'.format(self.name, self.post)
+    # def __str__(self):
+    #     return 'Comment by {} on {}'.format(self.name, self.post)
 
 
 

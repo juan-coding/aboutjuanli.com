@@ -1,4 +1,7 @@
 
+     {% load blog_tags %}
+     {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +9,6 @@
     <meta name="description" content="personal website">
     <meta name="author" content="Juan Li">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
-
-        {% load staticfiles %}
 
     <!--bootstrap css-->
  	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type = "text/css"/>
@@ -40,15 +41,8 @@
     }
 
     #content {
-    margin: 1.5cm;
+    margin: 2cm;
     }
-
-    <!--.panel {-->
-    <!--margin-top:1.6cm;-->
-    <!--padding-right:1.5cm;-->
-    <!--width: 270px;-->
-    <!--}-->
-
     #sidebar {
     position: fixed;
     margin-right:1.5cm;
@@ -56,8 +50,6 @@
     width: 300px;
     height:100%;
     }
-
-
 </style>
 
 
@@ -70,11 +62,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/about/"><font color="red">ABOUT</font><font color="#D4AC0D">JuanLi</font></a>
+                    <a class="navbar-brand" href="/"><font color="red">About</font><font color="#D4AC0D">JuanLi</font></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li><a href="/">HOME</a></li>
+                    <ul class="nav navbar-nav navbar-center">
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                        <li><a href="/about/">ABOUT</a></li>
                         <li><a href="/project/">PROJECT</a><li>
                         <li><a href="/cv/">CV</a></li>
                         <li><a href="/blog/">BLOG</a></li>
@@ -90,24 +83,28 @@
         </div>
         <div class="col-sm-2">
             <div id = 'sidebar'>
-             <h4>TAGS</h4>
-             {% for element in tag_count %}
-             <a href="/blog/tag/{{ element.tag }}">{{ element.tag }}</a> ({{ element.count }})<br>
-             {% endfor %}
-             <br>
-             <h4>ARCHIVE</h4>
-             {% for element in year_count %}
-             <a href="/blog/{{ element.year }}">{{ element.year }}</a> ({{ element.count }})<br>
-             {% endfor %}
+                <h4> TOTAL {% total_posts %} POSTS</h4><br>
+                <h4>RECENT POSTS</h4>
+                 {% recent_posts 6 %}<br>
+                <h4>MOST COMMENTED POSTS</h4>
+                 {% most_commented_posts 6 %}<br>
+
+                <h4>TAGS</h4>
+                    {% for element in tag_count %}
+                    <a href="/blog/tag/{{ element.tag }}">{{ element.tag }}</a> ({{ element.count }})<br>
+                     {% endfor %}
+                     <br>
+                <h4>ARCHIVE</h4>
+                     {% for element in year_count %}
+                     <a href="/blog/{{ element.year }}">{{ element.year }}</a> ({{ element.count }})<br>
+                     {% endfor %}
             </div>
         </div>
      </div>
 
-
-
 	<footer class="footer">
 		<div class="container-fluid" style='margin-left:15px'>
-            <p>Copy right &copy; {%now "Y"%} Juan Li &middot;</p>
+            <p>Copy right &copy; {%now "Y"%} Juan Li &middot; &nbsp;<a href="mailto:juanli.work@gmail.com">juanli.work@gmail.com</a></p>
 		</div>
 	</footer>
 </body>

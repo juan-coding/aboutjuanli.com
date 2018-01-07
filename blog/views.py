@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 import re
 from blog.forms import EmailSharePostForm, CommentForm
 # from django.urls import reverse
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 
 
 # class PostListView(ListView):
@@ -149,33 +149,33 @@ def tag_view(request, tag):
     #                                               'year_count': sidebardata['year_count']})
 
 
-def share_post(request, post_id):
-    # get_object_or_404 return a single post, so use it in this function
-    post = get_object_or_404(Post,
-                             id=post_id,
-                             status='published')
-    sent = False
-
-    if request.method == 'POST':
-        form = EmailSharePostForm(request.POST)
-        if form.is_valid():
-            from django.urls import reverse
-            post_url = request.build_absolute_uri(reverse('post_detail', args=(post.publish.year, post.publish.month,
-                                                                               post.publish.day, post.slug)))
-            cd = form.cleaned_data
-            name = cd['name']
-            from_email = cd['email']
-            to_email = cd['to']
-            comment = cd['comment']
-            subject = '{} ({}) recommends you reading "{}"'.format(name, from_email, post.title)
-            message = "Read '{}' at {}. {}'s comments: {}".format(post.title, post_url, name, comment)
-            send_mail(subject, message, from_email, [to_email])
-            sent = True
-    else:
-        form = EmailSharePostForm()
-    return render(request, 'blog/share/index.html', {'post': post,
-                                                     'form': form,
-                                                     'sent': sent})
+# def share_post(request, post_id):
+#     # get_object_or_404 return a single post, so use it in this function
+#     post = get_object_or_404(Post,
+#                              id=post_id,
+#                              status='published')
+#     sent = False
+#
+#     if request.method == 'POST':
+#         form = EmailSharePostForm(request.POST)
+#         if form.is_valid():
+#             from django.urls import reverse
+#             post_url = request.build_absolute_uri(reverse('post_detail', args=(post.publish.year, post.publish.month,
+#                                                                                post.publish.day, post.slug)))
+#             cd = form.cleaned_data
+#             name = cd['name']
+#             from_email = cd['email']
+#             to_email = cd['to']
+#             comment = cd['comment']
+#             subject = '{} ({}) recommends you reading "{}"'.format(name, from_email, post.title)
+#             message = "Read '{}' at {}. {}'s comments: {}".format(post.title, post_url, name, comment)
+#             send_mail(subject, message, from_email, [to_email])
+#             sent = True
+#     else:
+#         form = EmailSharePostForm()
+#     return render(request, 'blog/share/index.html', {'post': post,
+#                                                      'form': form,
+#                                                      'sent': sent})
 
 
 

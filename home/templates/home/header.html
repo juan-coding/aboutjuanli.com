@@ -21,6 +21,9 @@
 
     <link rel="shortcut icon" href="{% static 'home/img/favicon.ico' %}" type="image/x-icon"/>
 
+    <!--add social media buttons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>JuanLi|{% block title %}{% endblock %}</title>
 </head>
 
@@ -40,34 +43,49 @@
     color: red;
     }
     #content {
-    margin-left: 2cm;
-    margin-right: 2cm;
+    margin-left: 1.5cm;
     }
+
+
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
 
 </style>
 
 
-
 <body>
-    <!--<div style="background-color:black">-->
-    <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--<div class="row">-->
-			  <!--<div class="col-sm-2">-->
-				  <!--<br>-->
-                  <!--<br>-->
-				  <!--<center>-->
-                      <!--<h3><font color="red">about</font><font style="oblique" color="white">JuanLi</font><font color="red">.com</font></h3>&lt;!&ndash;<img src="{% static 'personal/img/profile.jpg' %}" class="img-responsive" style='max-height:100px;' alt="face">&ndash;&gt;-->
-				  <!--</center>-->
-			  <!--</div>-->
-			  <!--<div class="col-sm-10">-->
-                  <!--<center>-->
-                      <!--<h2><font color="#5DADE2 ">{% block contents %}{% endblock %}</font></h2>-->
-                      <!--<p><br></p>-->
-                  <!--</center>-->
-			  <!--</div>-->
-		<!--</div>-->
-      <!--</div>-->
-
        <nav class="navbar navbar-inverse center" data-spy="affix">
            <div class="container-fluid">
                 <div class="navbar-header">
@@ -76,12 +94,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/about/"><font color="red">ABOUT</font><font color="#D4AC0D">JuanLi</font></a>
-                        <!--<img style="max-width:100px; margin-top: -15px;" src="{% static 'home/img/apple-touch-icon-57x57.png' %}"/></a>-->
+                    <a class="navbar-brand" href="/"><font color="red">About</font><font color="#D4AC0D">JuanLi</font></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li><a href="/">HOME</a></li>
+                    <ul class="nav navbar-nav navbar-center">
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                        <li><a href="/about/">ABOUT</a></li>
                         <li><a href="/project/">PROJECT</a><li>
                         <li><a href="/cv/">CV</a></li>
                         <li><a href="/blog/">BLOG</a></li>
@@ -98,7 +116,7 @@
 
 	<footer class="footer">
 		<div class="container-fluid" style='margin-left:15px'>
-            <p>Copy right &copy; {%now "Y"%} Juan Li &middot;</p>
+            <p>Copy right &copy; {%now "Y"%} Juan Li &middot; &nbsp;<a href="mailto:juanli.work@gmail.com">juanli.work@gmail.com</a></p>
 		</div>
 	</footer>
 </body>
