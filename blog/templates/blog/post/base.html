@@ -1,10 +1,8 @@
-
-     {% load blog_tags %}
-     {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+         {% load blog_tags %}
+ {% load staticfiles %}
     <meta charset="UTF-8">
     <meta name="description" content="personal website">
     <meta name="author" content="Juan Li">
@@ -25,6 +23,8 @@
     <link rel="shortcut icon" href="{% static 'home/img/favicon.ico' %}" type="image/x-icon"/>
 
     <title>JuanLi|{% block title %}{% endblock %}</title>
+
+
 </head>
 
 <style>

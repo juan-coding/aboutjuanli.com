@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 import re
+from django.urls import reverse
 
 
 class PublishedManger(models.Manager):
@@ -39,6 +40,12 @@ class Post(models.Model):
     def tag_list(self):
         tag_list = re.split(", ", self.tag)
         return tag_list
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[self.publish.year,
+                                                 self.publish.month,
+                                                 self.publish.day,
+                                                 self.slug])
 
 
 class Comment(models.Model):

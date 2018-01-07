@@ -20,7 +20,8 @@ def index(request):
             if cc_myself:
                 recipients.append(sender_email)
 
-            message += "This message was sent by {} with email: {}".format(sender_name, sender_email)
+            message = "This message was sent by {} with email: {}".format(sender_name, sender_email) + '\n' +\
+                      'Message:' + '\n' + message
             send_mail(subject, message, sender_email, recipients)
             sent = True
             # return HttpResponse('/THANKS FOR YOUR MESSAGE!/')

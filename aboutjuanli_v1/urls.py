@@ -15,13 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.sitemaps.views import sitemap
+from blog.sitemaps import PostSiteMap
 
+sitemaps = {'posts': PostSiteMap}
+
+# apps
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('blog/', include('blog.urls')),
+    path('blog/', include('blog.urls',)),
     path('about/', include('about.urls')),
     path('cv/', include('cv.urls')),
     path('contact/', include('contact.urls')),
     path('project/', include('project.urls')),
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap')
 ]

@@ -10,6 +10,7 @@
 <h2>{{ body_title }}</h2><hr>
 
 {% for post in posts %}
+
 <h3><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h3>
 <em>Update</em>: {{ post.updated|date:"Y-m-d" }}&nbsp;&nbsp;
 <em>Publish</em>: {{ post.publish|date:"Y-m-d" }}&nbsp;&nbsp;

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+INSTALLED_APPS += [
     'home',
     'blog',
     'about',
@@ -44,7 +46,15 @@ INSTALLED_APPS = [
     'contact',
     'project',
 ]
-INSTALLED_APPS += ['django_social_share']
+# external django plugin
+INSTALLED_APPS += [
+    'django_social_share',
+                   ]
+# add a sitemap to my site
+INSTALLED_APPS += [
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+]
 
 
 MIDDLEWARE = [
