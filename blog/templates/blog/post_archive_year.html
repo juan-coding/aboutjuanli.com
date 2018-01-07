@@ -8,7 +8,7 @@
 {% block content %}
 <h1>Posts for {{ year }}</h1>
 {% for post in posts %}
-<h2><a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h2>
+<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>></h2>
 <em>Update</em>: {{ post.updated|date:"Y-m-d" }}&nbsp;&nbsp;
 <em>Publish</em>: {{ post.publish|date:"Y-m-d" }}&nbsp;&nbsp;
 <em>Tags</em>:

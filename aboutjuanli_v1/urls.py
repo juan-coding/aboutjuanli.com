@@ -24,7 +24,7 @@ sitemaps = {'posts': PostSiteMap}
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('blog/', include('blog.urls',)),
+    path('blog/', include('blog.urls')),
     path('about/', include('about.urls')),
     path('cv/', include('cv.urls')),
     path('contact/', include('contact.urls')),
