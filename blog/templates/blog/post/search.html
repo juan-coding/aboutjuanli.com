@@ -8,7 +8,7 @@
 {% block content %}
 
 <h2>{{ body_title }}</h2><hr>
-
+{% if sent %}
 {% for post in posts %}
 <!--<h3><a href="{% url 'blog:post_detail' post.publish.year post.publish.month post.publish.day post.slug  %}">{{ post.title }}</a></h3>-->
 <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
@@ -23,6 +23,15 @@
 
 {% endfor %}
 
+{% else %}
+<form role="form" action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"></button>
+</form>
+{% endif %}
+
+
 <div class="pagination">
     <span class="step-links">
         {% if posts.has_previous %}
@@ -35,13 +44,8 @@
         </span>&nbsp;
 
         {% if posts.has_next %}
-            <a href="?page=1">&laquo; first</a>
-            <!--{% if requst.GET.q %}&nbsp;-->
-                <!--<a href="?page={{ posts.next_page_number }}&?q={{ request.GET.q }}">next</a>&nbsp;-->
-            <!--{% else %}-->
-                <!--<a href="?page={{ posts.next_page_number }}">next</a>&nbsp;-->
-            <!--{% endif %}-->
-        <a href="?page={{ posts.next_page_number }}{% if request.GET.q %}}&?q={{ request.GET.q }}{% endif %}">next</a>&nbsp;
+            <a href="?page=1">&laquo; first</a>&nbsp;
+            <a href="?page={{ posts.next_page_number }}">next</a>&nbsp;
         {% endif %}
         <a href="?page={{ posts.paginator.num_pages }}">final</a>&nbsp;
     </span>

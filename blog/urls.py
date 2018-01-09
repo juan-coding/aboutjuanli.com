@@ -26,6 +26,5 @@ urlpatterns = [
    re_path(r'^(?P<year>\d{4})/$', views.post_year_archive, name='post_year_archive'),
    re_path(r'^tag/(?P<tag>[-\w]+)/$', views.tag_view, name='tag_view'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
-
 ]
 

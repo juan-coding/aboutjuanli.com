@@ -44,8 +44,8 @@
     margin: 2cm;
     }
     #sidebar {
-    position: fixed;
-    margin-right:1.5cm;
+    position: float;
+    padding-right:2cm;
     background-color: #f6f6f6;
     width: 300px;
     height:100%;
@@ -83,22 +83,31 @@
         </div>
         <div class="col-sm-2">
             <div id = 'sidebar'>
+                <!--<h4><a href="/blog/search/">search post</a></h4>-->
+                  <!--use custom simple_tag-->
+                <form action=""  method="GET">
+                    <input type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
+                    <input type="submit" value="Search"/>
+                </form><br>
                 <h4> TOTAL {% total_posts %} POSTS</h4><br>
-                <p><a href="{% url 'blog:post_feed' %}">Subscribe to my RSS feed</a></p><br>
                 <h4>RECENT POSTS</h4>
+                <!--use inclusion_tag-->
                  {% recent_posts 6 %}<br>
                 <h4>MOST COMMENTED POSTS</h4>
                  {% most_commented_posts 6 %}<br>
 
                 <h4>TAGS</h4>
                     {% for element in tag_count %}
-                    <a href="/blog/tag/{{ element.tag }}">{{ element.tag }}</a> ({{ element.count }})<br>
+                    <a href="/blog/tag/{{ element.tag }}">{{ element.tag }}</a> ({{ element.count }})
                      {% endfor %}
-                     <br>
+                     <br><br>
                 <h4>ARCHIVE</h4>
                      {% for element in year_count %}
                      <a href="/blog/{{ element.year }}">{{ element.year }}</a> ({{ element.count }})<br>
                      {% endfor %}
+                     <br>
+                <h4>RSS</h4>
+                    <a href="{% url 'blog:post_feed' %}">Subscribe to my RSS feed</a></p><br><br><br>
             </div>
         </div>
      </div>

@@ -1,11 +1,9 @@
 from blog.models import Post
 from django.shortcuts import render, get_object_or_404
-# from django.views.generic import ListView
 from django.core.paginator import Paginator
 import re
-from blog.forms import EmailSharePostForm, CommentForm
-# from django.urls import reverse
-# from django.core.mail import send_mail
+from blog.forms import CommentForm
+from django.db.models import Q
 
 
 # class PostListView(ListView):
@@ -68,14 +66,23 @@ def post_data():
     return data
 
 
-# using Paginator for post list page
 def post_list(request):
     data = post_data()
-    # posts = Post.objects.all().filter(status='published')
-    paginator = Paginator(posts, 3)
-    page = request.GET.get('page')
+    queryset_list = posts
+    query = request.GET.get('q')
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(title__icontains=query)|
+            Q(body__icontains=query)
+        ).distinct() # distinct() to prevent duplicate search results popping up
+        body_title = "Search results for: " + query
+    else:
+        body_title = "All posts"
+    paginator = Paginator(queryset_list, 3)
+    page_request_var = 'page'
+    page = request.GET.get(page_request_var)
     post_list = paginator.get_page(page)
-    data.update({'posts': post_list, 'body_title': 'All posts in this blog'})
+    data.update({'posts': post_list, 'body_title': body_title})
     return render(request, 'blog/post/list.html', data)
 
 
@@ -177,8 +184,22 @@ def tag_view(request, tag):
 #                                                      'form': form,
 #                                                      'sent': sent})
 
-
-
-
+#
+# def search_post(request, text):
+#     posts = Post.published.all().filter(body_icontains=text)
+#     sent = False
+#
+#     if request.method == "POST":
+#         form = SearchForm(request.POST)
+#         if form.is_valid():
+#
+#             message = "Posts containing {}".format(text)
+#             sent = True
+#
+#     else:
+#         form = SearchForm()
+#     return render(request, 'blog/post/search.html', {'posts': posts,
+#                                                      'form': form,
+#                                                      'sent': sent})
 
 
