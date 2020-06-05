@@ -36,7 +36,7 @@ dask==0.15.3
 datashape==0.5.4
 decorator==4.1.2
 distributed==1.19.1
-Django==2.0
+Django==2.2.13
 django-modelcluster==3.1
 django-taggit==0.22.1
 django-treebeard==4.2.0
